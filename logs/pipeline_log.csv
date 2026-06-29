@@ -1,0 +1,15 @@
+﻿Paso,Descripción,Filas,Nulos,Retención (%)
+0,Estado inicial (dataset crudo),8160,753,100.0
+1,Eliminación de registros duplicados completos,8034,753,98.46
+2,Estandarización de subscription_plan,8034,753,98.46
+3,Estandarización de country,8034,753,98.46
+4,Estandarización de favorite_genre,8034,753,98.46
+5,Conversión de last_login_date a datetime,8034,919,98.46
+6,"monthly_watch_time_mins: inválidos (-120,-1,50000,99999) a NaN",8034,999,98.46
+7,monthly_watch_time_mins: imputación por mediana según plan,8034,726,98.46
+8,favorite_genre: imputación con categoría 'Desconocido',8034,486,98.46
+9,last_login_date: conservación de valores NaT,8034,486,98.46
+10,age: inválidos (<=0 y >100) a NaN,8034,584,98.46
+11,age: imputación por mediana global,8034,486,98.46
+12,"customer_support_tickets: inválidos (-1,99,150) a NaN",8034,582,98.46
+13,customer_support_tickets: imputación por mediana global,8034,486,98.46
