@@ -1,225 +1,175 @@
 
 # 📊 Proyecto Integrador – Minería de Datos I
 
-## Análisis Exploratorio y Reducción de Dimensionalidad sobre Datos de Usuarios de una Plataforma de Streaming
+## Información general
 
+Proyecto desarrollado para la asignatura **Minería de Datos I** de la carrera **Técnico Superior en Ciencias de Datos e Inteligencia Artificial**.
 
-Proyecto desarrollado  para la asignatura **Minería de Datos I** de la carrera **Técnico Superior en Ciencias de Datos e Inteligencia Artificial**.
+**Integrante**
 
----
+* Mateo Cantos Lucero
 
-# 📖 Descripción
-
-Este proyecto desarrolla un flujo completo de **Minería de Datos**, partiendo de un conjunto de datos correspondiente a usuarios de una plataforma de streaming.
-
-El trabajo comprende todas las etapas del proceso de análisis:
-
-- Inspección inicial del dataset.
-- Preparación y limpieza de los datos.
-- Análisis Exploratorio de Datos (EDA).
-- Reducción de dimensionalidad mediante PCA.
-- Elaboración de conclusiones.
-- Desarrollo de un dashboard interactivo con Streamlit.
-
-Todas las decisiones metodológicas fueron justificadas mediante evidencia obtenida durante el análisis, priorizando la reproducibilidad y la trazabilidad del proceso.
+El proyecto presenta un proceso completo de análisis de datos, desde la inspección inicial del dataset hasta la comunicación de resultados mediante una aplicación interactiva desarrollada con Streamlit.
 
 ---
 
-# 🎯 Objetivos
+# 🎯 Objetivo del proyecto
 
-- Analizar la calidad inicial del conjunto de datos.
-- Detectar valores faltantes, duplicados e inconsistencias.
-- Preparar un dataset limpio para el análisis.
-- Identificar patrones de comportamiento mediante EDA.
-- Aplicar Análisis de Componentes Principales (PCA).
-- Comunicar los resultados mediante una aplicación desarrollada en Streamlit.
+Desarrollar un análisis de datos reproducible y documentado sobre un conjunto de datos de usuarios de una plataforma de streaming, aplicando técnicas de inspección, preparación, análisis exploratorio y reducción de dimensionalidad mediante PCA, justificando cada decisión tomada y comunicando los resultados de forma clara e interactiva.
 
 ---
 
-# 🔄 Flujo de trabajo
+# 📂 Dataset
 
-```text
-Dataset Original
-        │
-        ▼
-01 - Inspección Inicial
-        │
-        ▼
-02 - Calidad y Preparación
-        │
-        ▼
-03 - Análisis Exploratorio (EDA)
-        │
-        ▼
-04 - PCA
-        │
-        ▼
-05 - Conclusiones
-        │
-        ▼
-Dashboard Streamlit
-```
+El conjunto de datos corresponde a usuarios de una plataforma de streaming e incluye variables demográficas, características del servicio contratado y métricas de uso de la plataforma.
+
+Cada registro representa un usuario e incorpora información utilizada para analizar la calidad de los datos, identificar patrones de comportamiento y aplicar técnicas de reducción de dimensionalidad.
+
+* **Dataset original:** `data/raw/`
+* **Dataset procesado:** `data/processed/`
 
 ---
 
-# 📁 Estructura del proyecto
+# 📁 Estructura del repositorio
 
 ```text
 PI_Mineria_Datos_1/
 │
-├── app/
-│   └── streamlit_app.py
+├── README.md
+├── requirements.txt
 │
 ├── data/
 │   ├── raw/
-│   ├── processed/
-│   └── external/
+│   └── processed/
 │
 ├── notebooks/
 │   ├── 01_inspeccion_inicial.ipynb
-│   ├── 02_calidad_preparacion.ipynb
-│   ├── 03_analisis_exploratorio.ipynb
+│   ├── 02_calidad_y_limpieza.ipynb
+│   ├── 03_eda.ipynb
 │   ├── 04_pca.ipynb
 │   └── 05_conclusiones.ipynb
+│
+├── app/
+│   ├── Home.py
+│   └── pages/
+│       ├── 01_Dataset.py
+│       ├── 02_EDA.py
+│       ├── 03_PCA.py
+│       └── 04_Conclusiones.py
 │
 ├── reports/
 │   └── informe_final.pdf
 │
-├── requirements.txt
-│
-└── README.md
+└── logs/
+    └── pipeline_log.csv
 ```
 
 ---
 
-# 🧹 Preparación de los datos
+# 🧹 Preparación y calidad de datos
 
-Durante la etapa de calidad y preparación se realizaron las siguientes tareas:
+Durante la etapa de preparación se realizó una inspección completa del conjunto de datos para identificar valores faltantes, registros duplicados, inconsistencias y formatos incorrectos.
 
-- Eliminación de registros completamente duplicados.
-- Normalización de variables categóricas.
-- Tratamiento de valores numéricos inválidos.
-- Imputación mediante mediana para variables numéricas.
-- Imputación por tipo de plan para `monthly_watch_time_mins`.
-- Conservación de fechas inválidas como `NaT`.
-- Generación del dataset limpio utilizado en el resto del proyecto.
+Las principales acciones incluyeron:
 
-Todas las decisiones fueron tomadas a partir de la evidencia obtenida durante la inspección inicial del dataset.
+* Eliminación de registros duplicados.
+* Conversión de tipos de datos.
+* Tratamiento de valores faltantes mediante criterios justificados.
+* Normalización de variables categóricas.
+* Generación del dataset limpio utilizado durante todo el análisis.
 
----
-
-# 📈 Principales resultados
-
-El análisis permitió obtener los siguientes hallazgos:
-
-- El tiempo mensual de visualización presenta una distribución asimétrica con una mayoría de usuarios de consumo moderado y un grupo reducido de usuarios altamente activos.
-
-- Los usuarios con planes **Premium** muestran, en promedio, mayores tiempos de visualización que los usuarios de planes Standard y Basic.
-
-- La edad no evidenció una relación lineal significativa con el tiempo de visualización.
-
-- Las correlaciones entre las variables numéricas resultaron débiles, indicando que el comportamiento de los usuarios depende de múltiples factores.
-
-- El Análisis de Componentes Principales confirmó que ninguna variable explica individualmente la mayor parte de la variabilidad del conjunto de datos.
+Cada transformación fue documentada en `logs/pipeline_log.csv`, permitiendo mantener la trazabilidad del proceso.
 
 ---
 
-# 🧠 Análisis de Componentes Principales (PCA)
+# 📈 Resumen del análisis exploratorio
 
-Para aplicar PCA se seleccionaron únicamente las variables numéricas del dataset.
+El análisis exploratorio permitió comprender el comportamiento general de los usuarios de la plataforma.
 
-Antes del análisis se utilizó **StandardScaler**, permitiendo que todas las variables participaran en igualdad de condiciones independientemente de su escala.
+Los principales hallazgos fueron:
 
-El PCA permitió:
-
-- Reducir la dimensionalidad del conjunto de datos.
-- Analizar la varianza explicada.
-- Interpretar el aporte de cada variable.
-- Confirmar los resultados obtenidos durante el EDA.
+* La distribución del tiempo de visualización presenta una marcada asimetría, con predominio de usuarios de consumo moderado.
+* Los usuarios con planes Premium registran, en promedio, mayores tiempos de visualización que los usuarios de otros planes.
+* No se observó una relación lineal significativa entre la edad y el tiempo de visualización.
+* Las correlaciones entre variables numéricas fueron bajas, indicando que el comportamiento de los usuarios depende de múltiples factores.
 
 ---
 
-# 🛠 Tecnologías utilizadas
+# 🧠 Reducción de dimensionalidad (PCA)
 
-| Tecnología | Uso |
-|------------|-----------------------------|
-| Python | Desarrollo del proyecto |
-| Pandas | Manipulación de datos |
-| NumPy | Operaciones numéricas |
-| Matplotlib | Visualización |
-| Seaborn | Visualización estadística |
-| Scikit-learn | PCA y StandardScaler |
-| Streamlit | Dashboard interactivo |
-| Jupyter Notebook | Desarrollo del análisis |
+El Análisis de Componentes Principales (PCA) se aplicó sobre las variables numéricas luego de realizar un escalamiento mediante **StandardScaler**.
+
+El análisis permitió:
+
+* Reducir la dimensionalidad del conjunto de datos.
+* Analizar la varianza explicada por cada componente principal.
+* Identificar el aporte relativo de las variables originales.
+* Complementar los resultados obtenidos durante el análisis exploratorio.
 
 ---
 
-# 🚀 Instalación
+# 🌐 Visualización interactiva
 
-Clonar el repositorio
+La aplicación fue desarrollada utilizando **Streamlit** y permite recorrer las principales etapas del proyecto mediante una interfaz interactiva.
+
+Incluye:
+
+* Presentación del proyecto.
+* Descripción del dataset.
+* Resultados del análisis exploratorio.
+* Resultados del PCA.
+* Conclusiones finales.
+
+**Repositorio GitHub**
+
+https://github.com/mateocantos/PI_Mineria_Datos_1
+
+**Aplicación Streamlit**
+
+https://mineriadatos1cantosluceromateo.streamlit.app
+
+---
+
+# ▶️ Cómo ejecutar localmente
+
+Clonar el repositorio:
 
 ```bash
 git clone https://github.com/mateocantos/PI_Mineria_Datos_1.git
 ```
 
-Ingresar al proyecto
+Ingresar al proyecto:
 
 ```bash
 cd PI_Mineria_Datos_1
 ```
 
-Instalar dependencias
+Instalar las dependencias:
 
 ```bash
 pip install -r requirements.txt
 ```
 
----
-
-# ▶️ Ejecutar la aplicación
+Ejecutar la aplicación:
 
 ```bash
-streamlit run app/streamlit_app.py
+streamlit run app/Home.py
 ```
 
 ---
 
-# 📄 Informe
+# 📄 Recursos del proyecto
 
-El informe técnico completo del proyecto se encuentra en:
-
-```text
-reports/informe_final.pdf
-```
+* Notebooks: `notebooks/`
+* Informe final: `reports/informe_final.pdf`
+* Registro ETL: `logs/pipeline_log.csv`
 
 ---
 
-# 🌐 Dashboard
+# ✅ Conclusiones
 
-**Aplicación Streamlit**
+El proyecto permitió desarrollar un proceso completo de análisis de datos siguiendo un enfoque reproducible y documentado.
 
-> *(Agregar la URL una vez publicada.)*
+Las decisiones tomadas durante las etapas de inspección, preparación, análisis exploratorio y reducción de dimensionalidad fueron justificadas mediante evidencia obtenida del conjunto de datos.
 
----
-
-# 💻 Repositorio
-
-GitHub:
-
-**https://github.com/mateocantos/PI_Mineria_Datos_1**
-
----
-
-# 👨‍💻 Autor
-
-**Mateo Cantos Lucero**
-
-Estudiante de la carrera **Técnico Superior en Ciencias de Datos e Inteligencia Artificial**.
-
-Proyecto desarrollado de manera individual para la asignatura **Minería de Datos I**.
-
----
-
-# 📌 Observaciones
-
-Este proyecto fue desarrollado siguiendo un enfoque reproducible de Minería de Datos, documentando cada etapa del proceso y justificando todas las decisiones de preparación y análisis a partir de la evidencia obtenida sobre el conjunto de datos.
+La aplicación desarrollada en Streamlit facilita la comunicación de los principales resultados de forma clara e interactiva, complementando la documentación técnica presentada en el repositorio y el informe final.

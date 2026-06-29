@@ -7,7 +7,7 @@ st.set_page_config(page_title="PI Minería de Datos · Streaming", page_icon="�
 
 # ---- Datos del proyecto ----
 INTEGRANTE = "Cantos Lucero Mateo"
-COMISION   = "[COMPLETAR]"
+COMISION   = "Sede Nodo"
 FECHA      = "29 de junio de 2026"
 REPO       = "https://github.com/mateocantos/PI_Mineria_Datos_1"
 
